@@ -10,7 +10,7 @@ from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from app.constants import PUBLIC_PATHS, SESSION_COOKIE_NAME
+from app.constants import API_PREFIX, PUBLIC_PATHS, SESSION_COOKIE_NAME
 from app.security import read_session
 
 UNAUTHENTICATED = JSONResponse(
@@ -19,8 +19,13 @@ UNAUTHENTICATED = JSONResponse(
 
 
 def is_public(path: str) -> bool:
-    """Login, health and the docs need no session; everything else does."""
-    return path in PUBLIC_PATHS
+    """Public = the named API paths, plus the whole frontend.
+
+    The frontend is served from this app, so its shell and assets must load
+    before a session exists or the login form is unreachable. Only `/api/*`
+    carries data, so guarding that prefix keeps deny-by-default where it counts.
+    """
+    return path in PUBLIC_PATHS or not path.startswith(API_PREFIX)
 
 
 class RequireSessionMiddleware(BaseHTTPMiddleware):

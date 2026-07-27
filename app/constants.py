@@ -55,6 +55,13 @@ PUBLIC_PATHS = frozenset(
     }
 )
 
+# The frontend is served from this app, so the login page and its assets must be
+# reachable without a session — otherwise nobody can reach the form to log in.
+# Anything NOT under API_PREFIX is a static file or a client-side route, and both
+# are safe to serve anonymously: they contain no data. Every /api/* path stays
+# deny-by-default, so this widens what is *visible*, never what is *readable*.
+FRONTEND_DIRECTORY = "app_frontend"
+
 # Auto end-of-day archiving fires at midnight GMT (= UTC), matching the UTC
 # timestamps in the DB so "end of day" never drifts with server timezone.
 ARCHIVE_TIMEZONE = "GMT"

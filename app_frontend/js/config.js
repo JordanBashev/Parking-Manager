@@ -9,7 +9,7 @@
 // tunnel), so when it changes, update TUNNEL_API_BASE below and redeploy the
 // frontend (a git push to the Pages branch).
 
-const TUNNEL_API_BASE = "https://REPLACE-ME.trycloudflare.com/api";
+const TUNNEL_API_BASE = "https://counsel-vocal-parties-restoration.trycloudflare.com/api";
 
 const isLocal =
   location.hostname === "localhost" || location.hostname === "127.0.0.1";

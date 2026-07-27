@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+aiosqlite
+pydantic
+pydantic-settings
+bcrypt
+itsdangerous
+apscheduler
+python-multipart
+ultralytics
+rapidocr-onnxruntime
+pillow
